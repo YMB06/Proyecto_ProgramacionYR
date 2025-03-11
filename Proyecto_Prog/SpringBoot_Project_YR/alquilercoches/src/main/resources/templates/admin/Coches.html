@@ -1,0 +1,67 @@
+
+<html xmlns="http://www.thymeleaf.org" 
+layout:decorate="admin/layout/base">
+
+<main layout:fragment="content" class="container-fluid flex-grow-1 p-4" style="margin-left: 250px;">
+    <div class="row">
+        <!-- Add this near the top of your existing table -->
+<div class="mb-3">
+    <a th:href="@{/admin/coches/crear}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Nuevo Coche
+    </a>
+</div>
+
+<!-- Add this for showing messages -->
+<div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
+        
+        <!-- Add this for showing messages -->
+        <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Imagen</th>  <!-- Add this new column -->
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Año</th>
+                        <th>Color</th>
+                        <th>Acciones</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="coches : ${LCoches}">
+                        <td th:text="${coches.id}"></td>
+                        <td>
+                            <!-- Show image if exists, otherwise show placeholder -->
+                            <img th:if="${coches.imagen}" 
+                                 th:src="@{/uploads/coches/{imagen}(imagen=${coches.imagen})}"
+                                 class="img-thumbnail"
+                                 style="max-width: 100px; height: auto;"
+                                 th:alt="${coches.marca + ' ' + coches.modelo}">
+                            <span th:unless="${coches.imagen}" class="text-muted">Sin imagen</span>
+                        </td>
+                        <td th:text="${coches.marca}"></td>
+                        <td th:text="${coches.modelo}"></td>
+                        <td th:text="${coches.año}"></td>
+                        <td th:text="${coches.color}"></td>
+                        <td>
+                            <a th:href="@{/admin/coches/editar/{id}(id=${coches.id})}" class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                        </td>
+                        <td>
+                            <form th:action="@{/admin/coches/borrar/{id}(id=${coches.id})}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" 
+                                        onclick="return confirm('¿Estás seguro de que quieres eliminar este coche?')">
+                                    <i class="bi bi-trash"></i> Borrar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
