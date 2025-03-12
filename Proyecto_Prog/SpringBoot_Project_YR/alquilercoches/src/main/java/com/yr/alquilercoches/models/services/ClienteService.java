@@ -16,10 +16,7 @@ public class ClienteService  {
      @Autowired
     private ClienteRepository clienteRepository;
 
-   // Use PasswordEncoder, not BCryptPasswordEncoder directly
 
-   @Autowired
-   private PasswordEncoder passwordEncoder;
 
    public Clientes save(Clientes cliente) {
     System.out.println("Saving user with username: " + cliente.getUsername());
