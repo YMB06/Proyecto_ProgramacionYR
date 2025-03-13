@@ -10,9 +10,7 @@ import com.yr.alquilercoches.models.repositories.AlquilerRepository;
 
 @Service
 public class AlquilerService {
-    //Injecta todo el comportamiento del repositorio
-    //GamasRepository en la propiedad gamasRep
-    //de la clase GamasService
+
     @Autowired
     AlquilerRepository alquilerRepository;
 

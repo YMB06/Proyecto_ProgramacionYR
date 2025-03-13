@@ -17,7 +17,6 @@ public class ClienteService  {
     private ClienteRepository clienteRepository;
 
 
-
    public Clientes save(Clientes cliente) {
     System.out.println("Saving user with username: " + cliente.getUsername());
     return clienteRepository.save(cliente); // Asume que la contraseña ya viene codificada.

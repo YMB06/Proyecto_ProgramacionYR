@@ -61,6 +61,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // cifra la contraseña del usuario y la compara con la almacenada en la base de datos
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
