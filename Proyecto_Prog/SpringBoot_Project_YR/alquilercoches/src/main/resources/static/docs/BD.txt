@@ -1,14 +1,4 @@
-INSERT INTO coches (id, marca, modelo, año, color, precio, imagen) VALUES
-(1, 'Toyota', 'Corolla', 2018, 'Azul Oscuro', 150.00, '25c617b4-74e8-47be-9652-31a931dfb7dc_cd608ad7-f4d9-44b7-8905-c0829c558b37_toyota_corolla_toyota-corolla_2018-1643233745268.jpg'),
-(2, 'Ford', 'Focus', 2019, 'Negro', 160.00, '7f50cfe5-bb4f-434e-9f08-d62075057264_e0849372-b8b8-481b-b941-dcd2dd700590_tn5_4813_240625113515_1.jpg'),
-(3, 'Honda', 'Civic', 2020, 'Azul', 170.00, 'b6ab6616-e74f-4ddb-911b-66262c6e0817_d8bc29b3-0f6c-44b4-9dea-fb3f78c7c563_honaca.jpeg'),
-(4, 'Chevrolet', 'Malibu', 2017, 'Rojo', 140.00, 'bc07469a-4c4a-4c16-bd40-6b76433c34be_0c941185-49da-4d4e-940c-1e11a22486d4_download.jpg'),
-(5, 'Volkswagen', 'Golf', 2016, 'Gris', 130.00, '3438d624-90de-4100-96f2-c27345b85e76_2039c938-3a2a-465e-9155-8ea67a86912a_vgg.jpeg'),
-(6, 'BMW', 'Serie 3', 2018, 'Blanco', 250.00, 'da8c25fa-373e-4b12-85c7-b3ab5f2f8b32_373165a1-4d13-4b40-b2dd-8c7ecede1780_bmws3.jpeg'),
-(7, 'Audi', 'A4', 2019, 'Negro', 260.00, '77bd6c5a-f2f0-4cab-8a5b-38ee8f17a346_6ffc6886-f800-40f5-a706-bed104c69f09_audia419neg.jpeg'),
-(8, 'Mercedes-Benz', 'C-Class', 2020, 'Azul', 270.00, 'd960b9b9-396d-4f6e-b6fd-3ef6daea0e3b_b80066c5-01e7-4053-a1e4-5e9d42c37700_Mercedes-Benz C-Class 2020 Azul.jpeg'),
-(9, 'Nissan', 'Altima', 2017, 'Rojo', 140.00, '4f045c8f-d063-44e8-8626-6409d1dfe2aa_96ea2743-a458-413e-a24c-b69f796d2b40_Nissan Altima 2017 Rojo.jpeg'),
-(10, 'Hyundai', 'Elantra', 2016, 'Gris', 130.00, '6e319e48-a0a5-4ea1-ae6c-0844b74efabc_c3f93c7c-4713-4c4c-9706-4c0e66303b35_Hyundai Elantra 2016  Gris.jpeg');
+
 
 
 -- First, delete existing admin if any
@@ -20,7 +10,7 @@ VALUES (
     'admin',
     'Administrator',
     'admin@admin.com',
-    '$2a$10$2RmSYjdH.lNywwCnIb5E0OZMOS3x9kOk5t5Vhs8XG3YHo2YA2b5eu',
+    '$2a$10$keNBhC.X2UliPG71ZTrmDu0jCRPz0gNddA.BUdEebaoS894ybIlou',
     'ROLE_ADMIN',
     '00000000A',
     '000000000',
