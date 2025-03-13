@@ -10,7 +10,7 @@ VALUES (
     'admin',
     'Administrator',
     'admin@admin.com',
-    '$2a$10$keNBhC.X2UliPG71ZTrmDu0jCRPz0gNddA.BUdEebaoS894ybIlou',
+    '$2a$10$mrF0ZYSGP93tPVrPFZhqQejoSpCr1Z9vlS2N5.Lrxa3bx.a3LEXBC',
     'ROLE_ADMIN',
     '00000000A',
     '000000000',
