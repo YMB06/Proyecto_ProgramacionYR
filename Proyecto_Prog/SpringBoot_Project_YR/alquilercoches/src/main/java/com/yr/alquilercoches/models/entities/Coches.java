@@ -43,9 +43,8 @@ public class Coches {
     private BigDecimal precio;
 
     @Column(name = "imagen")
-    private String imagen; // This will store the image file name
+    private String imagen; 
 
-    // Add getter and setter
     public String getImagen() {
         return imagen;
     }

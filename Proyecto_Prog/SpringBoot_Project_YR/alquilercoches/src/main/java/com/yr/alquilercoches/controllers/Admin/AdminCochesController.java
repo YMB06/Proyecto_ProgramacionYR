@@ -148,13 +148,13 @@ public String borrarCoche(@PathVariable Long id, RedirectAttributes redirectAttr
     try {
         Coches coche = cochesService.getId(id);
         if (coche != null) {
-            // First delete all associated rentals
+            // elimina los alquileres asociados
             List<Alquiler> alquileresAsociados = alquilerService.findByCocheId(id);
             for (Alquiler alquiler : alquileresAsociados) {
                 alquilerService.deleteById(alquiler.getId());
             }
             
-            // Then delete the car
+            // luego elimina el coche
             cochesService.deleteById(id);
             redirectAttributes.addFlashAttribute("mensaje", "Coche y sus alquileres asociados eliminados exitosamente");
         } else {

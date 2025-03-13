@@ -29,7 +29,7 @@ public class AdminClienteController {
     public String clientes(Model model) {
         List<Clientes> clientes = clienteService.getAll();
         model.addAttribute("LCliente", clientes);
-        return "admin/Clientes";  // Make sure this matches your template name exactly
+        return "admin/Clientes";  
     }
     @GetMapping("/admin/clientes/crear")
     public String mostrarFormularioCreacion(Model model) {
@@ -57,7 +57,7 @@ public class AdminClienteController {
                 return "redirect:/admin/clientes";
             }
             model.addAttribute("cliente", cliente);
-            return "admin/editarClientes"; // Note: matches your template name
+            return "admin/editarClientes"; 
         } catch (Exception e) {
             return "redirect:/admin/clientes";
         }
@@ -86,20 +86,20 @@ public class AdminClienteController {
     }
 
     @Autowired
-private AlquilerService alquilerService; // Add this at the top with other autowired services
+private AlquilerService alquilerService; 
 
 @PostMapping("/admin/clientes/borrar/{id}")
 public String borrarCliente(@PathVariable Long id, RedirectAttributes redirectAttributes) {
     try {
         Clientes cliente = clienteService.getId(id);
         if (cliente != null) {
-            // First delete all associated rentals
+            // elimina los alquileres asociados
             List<Alquiler> alquileresAsociados = alquilerService.findByClienteId(id);
             for (Alquiler alquiler : alquileresAsociados) {
                 alquilerService.deleteById(alquiler.getId());
             }
             
-            // Then delete the client
+            // Elimina al cliente
             clienteService.deleteById(id);
             redirectAttributes.addFlashAttribute("mensaje", "Cliente y sus alquileres asociados eliminados exitosamente");
         } else {

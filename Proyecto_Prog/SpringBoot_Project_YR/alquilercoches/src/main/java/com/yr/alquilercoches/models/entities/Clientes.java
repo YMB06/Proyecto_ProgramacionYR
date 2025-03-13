@@ -31,15 +31,12 @@ public class Clientes {
         @Column(nullable = false, unique = true)
         private String dni;
 
-         // Nuevo campo: Nombre de usuario (único)
     @Column(nullable = false, unique = true)
     private String username;
 
-    // Nuevo campo: Contraseña cifrada
     @Column(nullable = false)
     private String password;
 
-    // Nuevo campo: Rol del cliente (USER, ADMIN, etc.)
     @Column(nullable = false)
     private String role;
 

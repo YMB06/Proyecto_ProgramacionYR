@@ -20,18 +20,14 @@ public class CochesController {
     @GetMapping("/coches")
     public String alquiler(Model model){
         List<Coches> coches = this.cochesService.getAll();
-        // Change from "LCoche" to "coches" to match template
         model.addAttribute("coches", coches);
-        // Remove leading slash
         return "www/Coches/index";
     }
 
     @GetMapping("/coches/{id}")
     public String getAlquiler(@PathVariable Long id, Model model){
         Coches coche = this.cochesService.getId(id);
-        // Change from "LCoche" to "coche" for details page
         model.addAttribute("coche", coche);
-        // Fix template path and remove leading slash
         return "www/Coches/detalle";
     }
 }

@@ -32,16 +32,16 @@ public class AdminAlquilerController {
     public String alquiler(Model model) {
         List<Alquiler> alquileres = this.alquilerService.getAll();
         model.addAttribute("LAlquiler", alquileres);
-        return "admin/alquileres"; // Remove leading slash
+        return "admin/alquileres"; 
     }
 
     @GetMapping("/admin/alquileres/crear")
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("alquiler", new Alquiler());
         List<Coches> coches = cochesService.getAll();
-        List<Clientes> clientes = clienteService.getAll(); // Add this line
+        List<Clientes> clientes = clienteService.getAll(); 
         model.addAttribute("coches", coches);
-        model.addAttribute("clientes", clientes); // Add this line
+        model.addAttribute("clientes", clientes); 
         return "admin/crearAlquileres";
     }
     
@@ -53,7 +53,7 @@ public class AdminAlquilerController {
             return "redirect:/admin/alquileres";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al crear el alquiler: " + e.getMessage());
-            return "redirect:/admin/alquileres/crear"; // Updated redirect path
+            return "redirect:/admin/alquileres/crear"; 
         }
     }
     @PostMapping("/admin/alquileres/eliminar/{id}")
@@ -78,7 +78,7 @@ public class AdminAlquilerController {
             model.addAttribute("coches", coches);
             model.addAttribute("clientes", clientes);
             
-            return "admin/editarAlquiler"; // Note: case sensitive!
+            return "admin/editarAlquiler"; 
         } catch (Exception e) {
             return "redirect:/admin/alquileres";
         }

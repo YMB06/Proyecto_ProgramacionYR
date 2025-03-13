@@ -9,6 +9,6 @@ public class ClienteController {
 
     @GetMapping("/cliente/index")
     public String clienteIndex(Model model) {
-        return "cliente/index"; // Create this view in templates/cliente/index.html
+        return "cliente/index"; 
     }
 }

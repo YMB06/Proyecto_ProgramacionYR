@@ -25,7 +25,7 @@ public class AdminController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping({"/admin", "/admin/index"})  // Handle both URLs
+    @GetMapping({"/admin", "/admin/index"})  
     public String admin(Model model) {
         int totalCoches = cochesService.getAll().size();
         int totalAlquileres = alquilerService.getAll().size();

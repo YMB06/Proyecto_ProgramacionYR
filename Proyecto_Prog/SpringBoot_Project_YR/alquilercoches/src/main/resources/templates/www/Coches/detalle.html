@@ -76,7 +76,7 @@
     </div>
 
     <script th:inline="javascript">
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const precioBase = /*[[${coche.precio}]]*/ 0;
             const cocheId = /*[[${coche.id}]]*/ 0;
             const fechaInicio = document.getElementById('fecha_inicio');
@@ -95,7 +95,7 @@
 
                 const start = new Date(fechaInicio.value);
                 const end = new Date(fechaFin.value);
-
+                
                 if (end <= start) {
                     showMessage('La fecha de fin debe ser posterior a la fecha de inicio', false);
                     return;
@@ -112,7 +112,7 @@
                 try {
                     const response = await fetch(`/api/alquiler/check-availability?cocheId=${cocheId}&startDate=${fechaInicio.value}&endDate=${fechaFin.value}`);
                     const available = await response.json();
-
+                    
                     showMessage(
                         available ? '¡Vehículo disponible para estas fechas!' : 'Lo sentimos, el vehículo no está disponible para estas fechas.',
                         available
