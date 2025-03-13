@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yr.alquilercoches.models.entities.Alquiler;
@@ -86,5 +87,12 @@ public String reservarCoche(@RequestParam Long cocheId,
         redirectAttributes.addFlashAttribute("error", "Error al realizar la reserva: " + e.getMessage());
         return "redirect:/coches/" + cocheId;
     }
+}
+@GetMapping("/api/alquiler/check-availability")
+@ResponseBody
+public boolean checkAvailability(@RequestParam Long cocheId, 
+                                  @RequestParam String startDate, 
+                                  @RequestParam String endDate) {
+    return alquilerService.isCarAvailable(cocheId, startDate, endDate);
 }
 }

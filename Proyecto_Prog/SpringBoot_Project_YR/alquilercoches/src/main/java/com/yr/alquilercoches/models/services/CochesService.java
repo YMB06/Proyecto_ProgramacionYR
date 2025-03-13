@@ -25,12 +25,10 @@ public class CochesService {
         return cochesRepository.save(coche);
     }
 
-    //update
     public Coches update(Coches coche){
         return cochesRepository.save(coche);
     }
 
-    //delete
     public void delete(Coches coche){
         cochesRepository.delete(coche);
     }
