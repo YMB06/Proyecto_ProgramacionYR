@@ -28,17 +28,17 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String registrarCliente(@ModelAttribute Clientes cliente) {
-        // Debug original password
+        // aqui se obtiene la contraseña sin encriptar
         String rawPassword = cliente.getPassword();
         System.out.println("Registering user with password length: " + rawPassword.length());
         
-        // Encode password
+        // aqui se encripta la contraseña
         String encodedPassword = passwordEncoder.encode(rawPassword);
         cliente.setPassword(encodedPassword);
         cliente.setRole("ROLE_USER");
         
         System.out.println("Stored hash: " + encodedPassword);
-        // Verify we can match it immediately
+        // verificamos si la contraseña encriptada es igual a la contraseña sin encriptar
         boolean verifies = passwordEncoder.matches(rawPassword, encodedPassword);
         System.out.println("Verification after encoding: " + verifies);
         

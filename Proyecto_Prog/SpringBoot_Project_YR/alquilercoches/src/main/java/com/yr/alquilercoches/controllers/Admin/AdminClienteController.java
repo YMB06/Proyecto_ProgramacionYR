@@ -40,6 +40,7 @@ public class AdminClienteController {
     @PostMapping("/admin/clientes/crear")
     public String crearCliente(@ModelAttribute Clientes cliente, RedirectAttributes redirectAttributes) {
         try {
+            // encripta la contraseña antes de guardarla en la base de datos    
             cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
             clienteService.save(cliente);
             redirectAttributes.addFlashAttribute("mensaje", "Cliente creado exitosamente");
@@ -52,6 +53,7 @@ public class AdminClienteController {
     @GetMapping("/admin/clientes/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         try {
+            
             Clientes cliente = clienteService.getId(id);
             if (cliente == null) {
                 return "redirect:/admin/clientes";
@@ -69,7 +71,7 @@ public class AdminClienteController {
             Clientes existingCliente = clienteService.getId(id);
             cliente.setId(id);
             
-            // Only update password if a new one is provided
+            // solo actualiza la contraseña si se ha puesto una nueva contraseña
             if (cliente.getPassword() == null || cliente.getPassword().isEmpty()) {
                 cliente.setPassword(existingCliente.getPassword());
             } else {

@@ -4,7 +4,7 @@
 
 <div layout:fragment="content">
     <div class="container py-4">
-        <!-- Page Title -->
+        <!-- Titulo -->
         <div class="row mb-4">
             <div class="col-12">
                 <h1 class="text-center">Nuestros Vehículos</h1>
@@ -12,18 +12,18 @@
             </div>
         </div>
 
-        <!-- Cars Grid -->
+        <!-- Grid de las tarjetas de coches -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <div class="col" th:each="coche : ${coches}">
                 <div class="card h-100 shadow-sm hover-effect">
-                    <!-- Car Image -->
+                    <!-- Imagen -->
                     <img th:if="${coche.imagen}" 
                          th:src="@{/uploads/coches/{imagen}(imagen=${coche.imagen})}"
                          class="card-img-top" 
                          style="height: 200px; object-fit: cover;"
                          th:alt="${coche.marca + ' ' + coche.modelo}">
                     
-                    <!-- Car Details -->
+                    <!-- Detalles -->
                     <div class="card-body">
                         <h5 class="card-title fw-bold" th:text="${coche.marca + ' ' + coche.modelo}">Car Name</h5>
                         <div class="card-text">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     
-                    <!-- Card Footer -->
+                    <!-- Ir a ver los detalles de un coche especifico y reservar -->
                     <div class="card-footer bg-transparent border-top-0">
                         <div class="d-grid">
                             <a th:href="@{/coches/{id}(id=${coche.id})}" 

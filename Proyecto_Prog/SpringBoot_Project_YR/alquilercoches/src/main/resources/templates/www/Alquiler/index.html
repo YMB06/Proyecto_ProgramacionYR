@@ -7,7 +7,7 @@
         <h2 class="text-center mb-4">Mis Alquileres</h2>
 
         <div class="row">
-            <!-- Show message if no rentals -->
+            <!-- Muestra un mensaje si no hubiese alquileres -->
             <div th:if="${#lists.isEmpty(LAlquiler)}" class="col-12 text-center">
                 <div class="alert alert-info">
                     <i class="bi bi-info-circle me-2"></i>
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <!-- Rentals Cards -->
+            <!-- Tarjetas de los alquileres -->
             <div th:each="alquiler : ${LAlquiler}" class="col-md-6 col-lg-4 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">

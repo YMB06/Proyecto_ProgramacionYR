@@ -37,6 +37,7 @@ public class Alquiler {
     @NotEmpty
     private String fecha_fin;
 
+    // Relación con la entidad Cliente
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Clientes cliente;

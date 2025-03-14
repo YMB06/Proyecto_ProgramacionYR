@@ -17,6 +17,7 @@ public class CustomUserDetails implements UserDetails {
     return this.cliente;
 }
 
+    // este metodo es para obtener los roles del usuario
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String role = cliente.getRole();

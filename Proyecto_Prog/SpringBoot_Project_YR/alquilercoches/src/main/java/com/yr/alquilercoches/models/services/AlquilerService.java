@@ -33,16 +33,15 @@ public class AlquilerService {
         this.alquilerRepository.delete(alquiler);
     }
 
-    //delete by id
     public void deleteById(Long id){
         this.alquilerRepository.deleteById(id);
     }
-    //getid
     public Alquiler getId(Long id){
         Alquiler alquiler = this.alquilerRepository.findById(id).get();
         System.out.println(alquiler);
         return alquiler;
     }
+
     public List<Alquiler> findByCocheId(Long cocheId) {
         return alquilerRepository.findByCocheId(cocheId);
     }
@@ -61,30 +60,30 @@ public class AlquilerService {
             LocalDate start = LocalDate.parse(startDate);
             LocalDate end = LocalDate.parse(endDate);
 
-            // First check if the dates are valid
+            // comprobamos que las fechas de los alquileres sean validas
             if (start.isAfter(end)) {
                 return false;
             }
 
-            // Check against existing rentals
+            // comprobamos los alquileres
             for (Alquiler rental : existingRentals) {
                 try {
                     LocalDate rentalStart = LocalDate.parse(rental.getFecha_inicio());
                     LocalDate rentalEnd = LocalDate.parse(rental.getFecha_fin());
 
-                    // Check if dates overlap
+                    // comprobamos que no se solapen
                     boolean overlap = !(end.isBefore(rentalStart) || start.isAfter(rentalEnd));
                     if (overlap) {
                         return false;
                     }
                 } catch (Exception e) {
-                    // Skip invalid dates in existing rentals
+                    // se salta el alquiler si hay algun error en las fechas
                     continue;
                 }
             }
             return true;
         } catch (Exception e) {
-            // If there's any error parsing dates or other issues, consider the car unavailable
+            // si hay algun error en las fechas se dice que el coche no esta disponible
             return false;
         }
     }

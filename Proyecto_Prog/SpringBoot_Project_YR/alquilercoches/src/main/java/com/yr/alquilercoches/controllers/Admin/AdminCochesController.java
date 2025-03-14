@@ -51,22 +51,22 @@ public class AdminCochesController {
                            @RequestParam("file") MultipartFile file,
                            RedirectAttributes redirectAttributes) {
         try {
-            // Handle file upload
+            // maneja la subida de archivos
             if (!file.isEmpty()) {
-                // Generate unique filename
+                // genera un nombre de archivo único
                 String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
                 
-                // Create upload directory if it doesn't exist
+                // crea el directorio donde s eguardan si todavia no exite
                 Path uploadDir = Paths.get(uploadPath);
                 if (!Files.exists(uploadDir)) {
                     Files.createDirectories(uploadDir);
                 }
                 
-                // Save file
+                // guarda el archivo
                 Path filePath = uploadDir.resolve(filename);
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
                 
-                // Set image name in coche entity
+                // guarda el nombre de la imagen en su campo dentro de la entidad de coches
                 coche.setImagen(filename);
             }
             
@@ -98,32 +98,32 @@ public class AdminCochesController {
                              @RequestParam(value = "file", required = false) MultipartFile file,
                              RedirectAttributes redirectAttributes) {
         try {
-            // Handle file upload
+            // maneja la subida de archivos
             if (file != null && !file.isEmpty()) {
-                // Delete old image if exists
+                // elimina la imagen anterior si es que habia alguna previamente
                 Coches existingCoche = cochesService.getId(id);
                 if (existingCoche != null && existingCoche.getImagen() != null) {
                     Path oldFile = Paths.get(uploadPath).resolve(existingCoche.getImagen());
                     Files.deleteIfExists(oldFile);
                 }
     
-                // Generate unique filename
+                // genera un nombre para esa imagen
                 String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
                 
-                // Create upload directory if it doesn't exist
+                // crea el directorio si no existe todavia
                 Path uploadDir = Paths.get(uploadPath);
                 if (!Files.exists(uploadDir)) {
                     Files.createDirectories(uploadDir);
                 }
                 
-                // Save new file
+                // guarda la nueva imagen
                 Path filePath = uploadDir.resolve(filename);
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
                 
-                // Set new image name
+                // guarda la nueva imagen en su respectivo campo en la entidad de coches
                 coche.setImagen(filename);
             } else {
-                // Keep existing image if no new file uploaded
+                // deja la imagen que ya habia previamente si no se ha cambiado 
                 Coches existingCoche = cochesService.getId(id);
                 if (existingCoche != null) {
                     coche.setImagen(existingCoche.getImagen());

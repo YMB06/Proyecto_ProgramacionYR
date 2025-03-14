@@ -27,6 +27,7 @@ public class AdminController {
 
     @GetMapping({"/admin", "/admin/index"})  
     public String admin(Model model) {
+        //sacamos el total de coches, alquileres, clientes y de los ingresos que han generado los alquileres
         int totalCoches = cochesService.getAll().size();
         int totalAlquileres = alquilerService.getAll().size();
         int totalClientes = clienteService.getAll().size();
@@ -34,6 +35,7 @@ public class AdminController {
                 .map(Alquiler::getPrecio_total)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        //añadimos los datos al modelo para mostrarlos en la vista
         model.addAttribute("totalcoches", totalCoches);
         model.addAttribute("totalAlquileres", totalAlquileres);
         model.addAttribute("totalClientes", totalClientes);

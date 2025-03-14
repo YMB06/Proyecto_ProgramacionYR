@@ -19,16 +19,18 @@ public class ClienteUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
+            // buscar el usuario en la base de datos
             Clientes cliente = clienteRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
             
-            // Add detailed logging
+            // ver en la consola la infomracion del usuario que esta intentando loguearse
             System.out.println("=== User Authentication Attempt ===");
             System.out.println("Username: " + cliente.getUsername());
             System.out.println("Role: " + cliente.getRole());
             System.out.println("Password Hash: " + cliente.getPassword());
             System.out.println("==============================");
             
+            // devuelve el usuario
             return new CustomUserDetails(cliente);
         } catch (Exception e) {
             System.err.println("Error during authentication: " + e.getMessage());

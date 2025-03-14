@@ -4,16 +4,16 @@
 <div layout:fragment="content">
     <div class="container py-4">
         <div class="row justify-content-center">
-            <!-- Car Image Column -->
+            <!-- Imagen del coche -->
             <div class="col-12 col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <img th:if="${coche.imagen}" th:src="@{/uploads/coches/{imagen}(imagen=${coche.imagen})}"
-                        class="card-img-top" style="height: 300px; object-fit: contain;"
+                        class="card-img-top" style="height: 300px; width: 100%; object-fit: cover;"
                         th:alt="${coche.marca + ' ' + coche.modelo}">
                 </div>
             </div>
-
-            <!-- Car Details Column -->
+            
+            <!-- Detalles del coche -->
             <div class="col-12 col-md-6">
                 <h2 class="h3 mb-4" th:text="${coche.marca + ' ' + coche.modelo}">Car Name</h2>
 
@@ -38,7 +38,7 @@
                             </li>
                         </ul>
 
-                        <!-- Rental Form -->
+                        <!-- Formulario con las fechas para reservar el coche -->
                         <form th:action="@{/alquiler/reservar}" method="post" id="rentalForm" class="mt-4">
                             <input type="hidden" name="cocheId" th:value="${coche.id}">
 
@@ -53,11 +53,11 @@
                             </div>
 
                             <div id="precioTotal" class="alert alert-info d-none mb-3">
-                                <!-- Price will be displayed here -->
+                                <!-- Aqui se muestra el precio que aumenta dependiendo de cuantos dias vayas a tenerlo -->
                             </div>
 
                             <div id="availabilityMessage" class="alert d-none mb-3">
-                                <!-- Availability message will be displayed here -->
+                                <!--Aqui te avisa de si el coche esta disponible para alquilar o no en x fechas -->
                             </div>
 
                             <div class="d-grid gap-2">
@@ -75,8 +75,11 @@
         </div>
     </div>
 
+    <!-- Script para comprobar la disponibilidad del coche y calcular el precio total -->
     <script th:inline="javascript">
         document.addEventListener('DOMContentLoaded', function() {
+        // [[]] es parte de la syntaxis de thymeleaf para pasar variables a javascript sin que de errores de syntaxis
+
             const precioBase = /*[[${coche.precio}]]*/ 0;
             const cocheId = /*[[${coche.id}]]*/ 0;
             const fechaInicio = document.getElementById('fecha_inicio');
@@ -101,15 +104,17 @@
                     return;
                 }
 
+                // calculamos el precio total
                 const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
                 const total = days * precioBase;
 
-                // Show total price
+                // mostramos el precio total 
                 precioTotal.textContent = `Precio total para ${days} día(s): ${total.toFixed(2)}€`;
                 precioTotal.classList.remove('d-none');
 
-                // Check availability
+                // comprobamos la disponibilidad del coche en las fechas que se hayan seleccionado
                 try {
+                    // fetch para comprobar la disponibilidad del coche trayendo los datos de la base de datos
                     const response = await fetch(`/api/alquiler/check-availability?cocheId=${cocheId}&startDate=${fechaInicio.value}&endDate=${fechaFin.value}`);
                     const available = await response.json();
                     
@@ -123,12 +128,14 @@
                 }
             }
 
+            // muestra mensajes de alerta de exito o error
             function showMessage(message, isSuccess) {
                 availabilityMessage.textContent = message;
                 availabilityMessage.className = `alert alert-${isSuccess ? 'success' : 'danger'} mb-3`;
                 availabilityMessage.classList.remove('d-none');
             }
 
+            // añadimos los eventos para comprobar la disponibilidad y calcular el precio total
             fechaInicio.addEventListener('change', checkAvailabilityAndCalculatePrice);
             fechaFin.addEventListener('change', checkAvailabilityAndCalculatePrice);
         });

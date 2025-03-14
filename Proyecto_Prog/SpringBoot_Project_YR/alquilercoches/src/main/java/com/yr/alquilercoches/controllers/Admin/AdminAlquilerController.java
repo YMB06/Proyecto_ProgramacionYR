@@ -48,6 +48,7 @@ public class AdminAlquilerController {
     @PostMapping("/admin/alquileres/crear")
     public String crearAlquiler(@ModelAttribute Alquiler alquiler, RedirectAttributes redirectAttributes) {
         try {
+            // crea el alquiler
             alquilerService.create(alquiler);
             redirectAttributes.addFlashAttribute("mensaje", "Alquiler creado exitosamente");
             return "redirect:/admin/alquileres";
@@ -56,9 +57,11 @@ public class AdminAlquilerController {
             return "redirect:/admin/alquileres/crear"; 
         }
     }
+
     @PostMapping("/admin/alquileres/eliminar/{id}")
     public String eliminarAlquiler(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
+            // elimina el alquiler
             alquilerService.deleteById(id);
             redirectAttributes.addFlashAttribute("mensaje", "Alquiler eliminado exitosamente");
             return "redirect:/admin/alquileres";
@@ -67,13 +70,16 @@ public class AdminAlquilerController {
             return "redirect:/admin/alquileres";
         }
     }
+
     @GetMapping("/admin/alquileres/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         try {
+            // obtiene el alquiler y los coches y clientes para el formulario
             Alquiler alquiler = alquilerService.getId(id);
             List<Coches> coches = cochesService.getAll();
             List<Clientes> clientes = clienteService.getAll();
             
+            // agrega los datos al model y muestra el formulario
             model.addAttribute("alquiler", alquiler);
             model.addAttribute("coches", coches);
             model.addAttribute("clientes", clientes);
@@ -87,6 +93,7 @@ public class AdminAlquilerController {
     @PostMapping("/admin/alquileres/editar/{id}")
     public String editarAlquiler(@PathVariable Long id, @ModelAttribute Alquiler alquiler, RedirectAttributes redirectAttributes) {
         try {
+            // actualiza el alquiler
             alquiler.setId(id);
             alquilerService.update(alquiler);
             redirectAttributes.addFlashAttribute("mensaje", "Alquiler actualizado exitosamente");
