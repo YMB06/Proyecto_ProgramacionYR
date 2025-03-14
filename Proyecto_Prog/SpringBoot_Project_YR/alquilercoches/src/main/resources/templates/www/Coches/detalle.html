@@ -12,7 +12,7 @@
                         th:alt="${coche.marca + ' ' + coche.modelo}">
                 </div>
             </div>
-            
+
             <!-- Detalles del coche -->
             <div class="col-12 col-md-6">
                 <h2 class="h3 mb-4" th:text="${coche.marca + ' ' + coche.modelo}">Car Name</h2>
@@ -77,9 +77,8 @@
 
     <!-- Script para comprobar la disponibilidad del coche y calcular el precio total -->
     <script th:inline="javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-        // [[]] es parte de la syntaxis de thymeleaf para pasar variables a javascript sin que de errores de syntaxis
-
+        document.addEventListener('DOMContentLoaded', function () {
+            // lo que esta comentado funciona con thymeleaf para que se pueda pasar a javascript
             const precioBase = /*[[${coche.precio}]]*/ 0;
             const cocheId = /*[[${coche.id}]]*/ 0;
             const fechaInicio = document.getElementById('fecha_inicio');
@@ -98,7 +97,7 @@
 
                 const start = new Date(fechaInicio.value);
                 const end = new Date(fechaFin.value);
-                
+
                 if (end <= start) {
                     showMessage('La fecha de fin debe ser posterior a la fecha de inicio', false);
                     return;
@@ -117,7 +116,7 @@
                     // fetch para comprobar la disponibilidad del coche trayendo los datos de la base de datos
                     const response = await fetch(`/api/alquiler/check-availability?cocheId=${cocheId}&startDate=${fechaInicio.value}&endDate=${fechaFin.value}`);
                     const available = await response.json();
-                    
+
                     showMessage(
                         available ? '¡Vehículo disponible para estas fechas!' : 'Lo sentimos, el vehículo no está disponible para estas fechas.',
                         available

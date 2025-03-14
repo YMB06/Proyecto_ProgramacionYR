@@ -18,6 +18,7 @@ public class Coches {
     
 
     @Id
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

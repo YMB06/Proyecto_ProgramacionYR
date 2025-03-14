@@ -1,6 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{www/layout/base}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{www/layout/base}">
 
 <div layout:fragment="content">
     <div class="container py-4">
@@ -17,29 +16,29 @@
             <div class="col" th:each="coche : ${coches}">
                 <div class="card h-100 shadow-sm hover-effect">
                     <!-- Imagen -->
-                    <img th:if="${coche.imagen}" 
-                         th:src="@{/uploads/coches/{imagen}(imagen=${coche.imagen})}"
-                         class="card-img-top" 
-                         style="height: 200px; object-fit: cover;"
-                         th:alt="${coche.marca + ' ' + coche.modelo}">
-                    
+                    <img th:if="${coche.imagen}" th:src="@{/uploads/coches/{imagen}(imagen=${coche.imagen})}"
+                        class="card-img-top" style="height: 200px; object-fit: cover;"
+                        th:alt="${coche.marca + ' ' + coche.modelo}">
+
                     <!-- Detalles -->
                     <div class="card-body">
                         <h5 class="card-title fw-bold" th:text="${coche.marca + ' ' + coche.modelo}">Car Name</h5>
                         <div class="card-text">
                             <ul class="list-unstyled">
-                                <li class="mb-2"><i class="bi bi-calendar3"></i> <span th:text="${'Año: ' + coche.año}"></span></li>
-                                <li class="mb-2"><i class="bi bi-palette"></i> <span th:text="${'Color: ' + coche.color}"></span></li>
-                                <li class="mb-2"><i class="bi bi-currency-euro"></i> <span th:text="${'Precio por día: ' + coche.precio + '€'}"></span></li>
+                                <li class="mb-2"><i class="bi bi-calendar3"></i> <span
+                                        th:text="${'Año: ' + coche.año}"></span></li>
+                                <li class="mb-2"><i class="bi bi-palette"></i> <span
+                                        th:text="${'Color: ' + coche.color}"></span></li>
+                                <li class="mb-2"><i class="bi bi-currency-euro"></i> <span
+                                        th:text="${'Precio por día: ' + coche.precio + '€'}"></span></li>
                             </ul>
                         </div>
                     </div>
-                    
+
                     <!-- Ir a ver los detalles de un coche especifico y reservar -->
                     <div class="card-footer bg-transparent border-top-0">
                         <div class="d-grid">
-                            <a th:href="@{/coches/{id}(id=${coche.id})}" 
-                               class="btn btn-primary">
+                            <a th:href="@{/coches/{id}(id=${coche.id})}" class="btn btn-primary">
                                 <i class="bi bi-info-circle me-2"></i>Ver Detalles
                             </a>
                         </div>
@@ -53,13 +52,16 @@
         .hover-effect {
             transition: transform 0.2s ease-in-out;
         }
+
         .hover-effect:hover {
             transform: translateY(-5px);
         }
+
         .card {
             border-radius: 10px;
             overflow: hidden;
         }
     </style>
 </div>
+
 </html>
